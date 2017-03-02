@@ -5,25 +5,32 @@ import {
   View,
   Image,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native'
 
 import CircleImageView from 'demo/src/components/circleimage/CircleImageView'
 import CustomTextInput from 'demo/src/components/textinput/CustomTextInput'
 
 export default class SignIn extends Component {
+    signup() {
+        Alert.alert('title', 'message',
+         [{text: 'Ask me later', onPress: () => console.log('Ask me later pressed')}])
+    }
+
     render() {
         return (
             <View style={styles.signIn}>
                 <Image 
-                resizeMode = {Image.resizeMode.center} 
+                resizeMode = {Image.resizeMode.contain} 
                 source = {require('demo/src/assets/images/bg_signin.png')} 
                 style={styles.background}>
                     <View style={styles.topView}>
                         <CircleImageView imageUrl={require('demo/src/assets/images/check_red.png')}/>
                     </View>
                     <View style = {styles.inputView}>
-                            <CustomTextInput 
+                        <View style = {{height: 150}}>
+                             <CustomTextInput 
                             style = {styles.textInput} 
                             icon = {require('demo/src/assets/images/user_name.png')}
                             placeholder = {"Email"}/>
@@ -35,17 +42,17 @@ export default class SignIn extends Component {
                                 <Text style = {styles.buttonText}>Forgot Password</Text>
                             </TouchableOpacity>
                         </View>
-                    <View>
-                        <TouchableOpacity
-                        style = {styles.buttonSubmit}>
+                    </View>
+                    
+                    <View style = {styles.bottomView}>
+                        <TouchableOpacity style = {styles.buttonSubmit}>
                             <Text style = {styles.buttonText}>Sign In</Text>
                         </TouchableOpacity>
-                        <View>
-                            <Text>
-                                <Text numberOfLines = {1} style = {styles.signUpQuestionText}>Don't have an account</Text>
-                                <TouchableOpacity>
-                                    <Text numberOfLines = {1} style = {styles.signUpText}>Sign Up</Text>
-                                </TouchableOpacity>
+                        <View style = {styles.signUpQuestionContainer}>
+                            <Text style = {styles.signupQuestionTextContainer}>
+                                <Text style = {styles.signUpQuestionText}>Don't have an account? </Text>
+                                <Text style = {styles.signUpText}
+                                    onPress = {this.signup}>Sign Up</Text>
                             </Text>
                         </View>
                     </View>
@@ -71,10 +78,10 @@ const styles = StyleSheet.create({
   
   inputView: {
       flex: 1,
-      height: 150
+      justifyContent: 'center'
   },
   bottomView: {
-    
+    //  height: 150
   },
   circleImage: {
   },
@@ -90,18 +97,32 @@ const styles = StyleSheet.create({
   },
   buttonText: {
       color: 'white',
-      textAlign: 'center'
+      textAlign: 'center',
+      fontWeight: 'bold'
   },
   buttonSubmit: {
       backgroundColor: '#ff1493',
       height: 60,
       justifyContent: 'center'
   },
+
+signUpQuestionContainer: {
+    alignItems: 'center', 
+    justifyContent: 'center',
+    height: 50
+},
+  signupQuestionTextContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'white',
+      textAlign: 'center',
+      backgroundColor: 'transparent'
+  },
   signUpQuestionText: {
-      fontSize: 20
+      fontSize: 16
   },
   signUpText: {
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: 'bold'
   }
 });

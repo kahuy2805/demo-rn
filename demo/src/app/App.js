@@ -3,12 +3,13 @@ import {
   View
 } from 'react-native';
 
-import SignIn from 'demo/src/containers/SignIn'
+import SignIn from 'containers/SignIn'
+import SignUp from 'containers/SignUp'
 
 export default class App extends Component {
     render() {
         return (
-            <SignIn />
+            <SignUp />
         );
     }
 }

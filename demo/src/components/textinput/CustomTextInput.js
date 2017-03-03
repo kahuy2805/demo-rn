@@ -7,7 +7,14 @@ import {
 } from 'react-native';
 
 export default class CustomTextInput extends Component {
-    render() {
+    static get defaultProps() {
+    return {
+            keyboardType: 'default',
+            secureTextEntry: false
+    };
+  }
+
+render() {
         return (
             <View style = {[this.props.style, styles.container]}>
                 <Image 
@@ -17,11 +24,19 @@ export default class CustomTextInput extends Component {
                 <TextInput 
                 style = {styles.input}
                 placeholder = {this.props.placeholder}
-                placeholderTextColor = 'white'/>
+                placeholderTextColor = 'white'
+                keyboardType = {this.props.keyboardType}
+                secureTextEntry = {this.props.secureTextEntry}
+                />
             </View>
         );
     }
 }
+
+// CustomTextInput.defaultProps = {
+    // keyboardType: 'default',
+    // secureTextEntry: false
+// }
 
 const styles = StyleSheet.create({
     container: {

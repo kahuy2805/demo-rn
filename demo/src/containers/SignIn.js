@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, propTypes } from 'react';
 import {
     StyleSheet,
     Text,
@@ -6,21 +6,22 @@ import {
   Image,
   Button,
   TouchableOpacity,
-  Alert
+  Alert,
+  Keyboard,
+  TouchableWithoutFeedback
 } from 'react-native'
 
 import CircleImageView from 'demo/src/components/circleimage/CircleImageView'
 import CustomTextInput from 'demo/src/components/textinput/CustomTextInput'
 
 export default class SignIn extends Component {
-    signup() {
-        Alert.alert('title', 'message',
-         [{text: 'Ask me later', onPress: () => console.log('Ask me later pressed')}])
+    _signup() {
+        this.props.onSignUpPressed()
     }
 
     render() {
         return (
-            <View style={styles.signIn}>
+            <TouchableWithoutFeedback onPress = {Keyboard.dismiss}>
                 <Image 
                 resizeMode = {Image.resizeMode.contain} 
                 source = {require('demo/src/assets/images/bg_signin.png')} 
@@ -52,19 +53,23 @@ export default class SignIn extends Component {
                             <Text style = {styles.signupQuestionTextContainer}>
                                 <Text style = {styles.signUpQuestionText}>Don't have an account? </Text>
                                 <Text style = {styles.signUpText}
-                                    onPress = {this.signup}>Sign Up</Text>
+                                    onPress = {this._signup.bind(this)}>Sign Up</Text>
                             </Text>
                         </View>
                     </View>
                 </Image>
-            </View>
+            </TouchableWithoutFeedback>
         );
     }
 }
 
+SignIn.propTypes = {
+    onSignUpPressed: React.PropTypes.func.isRequired
+}
+
 const styles = StyleSheet.create({
   signIn: {
-    flex: 1
+    // flex: 1
   },
   background: {
     flex: 1,

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 import {
     StyleSheet,
@@ -12,6 +12,11 @@ import {
  import CustomTextInput from 'components/textinput/CustomTextInput'
 
 export default class SignUp extends Component {
+
+ _signin() {
+        this.props.onSignInPressed()
+    }
+
     render () {
         return (
             <View style = {styles.signUp}>
@@ -26,32 +31,34 @@ export default class SignUp extends Component {
                              {/*style = {{height: 150}}>*/}
                             <CustomTextInput 
                             style = {styles.textInput} 
-                            icon = {require('demo/src/assets/images/user_name.png')}
-                            placeholder = {"Name"}/>
+                            icon = {require('assets/images/user_name.png')}
+                            placeholder = {'Name'}/>
                             <CustomTextInput 
                             style = {styles.textInput} 
-                            icon = {require('demo/src/assets/images/password.png')}
-                            placeholder = {"Email"}/>
+                            icon = {require('assets/images/email.png')}
+                            placeholder = {"Email"}
+                            keyboardType = {'email-address'}/>
                             <CustomTextInput 
                             style = {styles.textInput} 
-                            icon = {require('demo/src/assets/images/password.png')}
-                            placeholder = {"Password"}/>
+                            icon = {require('assets/images/password.png')}
+                            placeholder = {'Password'}
+                            secureTextEntry = {true}/>
                             <CustomTextInput 
                             style = {styles.textInput}
-                            icon = {require('demo/src/assets/images/password.png')}
+                            icon = {require('assets/images/birthday.png')}
                             placeholder = {"Birthday"}/>
                         </View>
                     </View>
                     
                     <View style = {styles.bottomView}>
                         <TouchableOpacity style = {styles.buttonSubmit}>
-                            <Text style = {styles.buttonText}>Sign In</Text>
+                            <Text style = {styles.buttonText}>Join</Text>
                         </TouchableOpacity>
                         <View style = {styles.signUpQuestionContainer}>
                             <Text style = {styles.signupQuestionTextContainer}>
-                                <Text style = {styles.signUpQuestionText}>Don't have an account? </Text>
+                                <Text style = {styles.signUpQuestionText}>Already have an account? </Text>
                                 <Text style = {styles.signUpText}
-                                    onPress = {this.signup}>Sign Up</Text>
+                                    onPress = {() => {this._signin()}}>Sign In</Text>
                             </Text>
                         </View>
                     </View>
@@ -59,6 +66,10 @@ export default class SignUp extends Component {
             </View>
         )
     }
+}
+
+SignUp.propTypes = {
+    onSignInPressed: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({
@@ -71,14 +82,14 @@ const styles = StyleSheet.create({
         height: undefined
     },
     titlePage: {
-        flex: 0.5,
-        backgroundColor: 'blue'
+        flex: 0.5
     },
     inputView: {
         flex: 2
     },
     textInput: {
-        height: 50
+        height: 50,
+        marginTop: 20
     },
     bottomView: {
     },
@@ -88,5 +99,35 @@ const styles = StyleSheet.create({
         marginTop: 50,
         marginLeft: 30,
         fontSize: 40
-    }
+    },
+    buttonText: {
+      color: 'white',
+      textAlign: 'center',
+      fontWeight: 'bold'
+  },
+  buttonSubmit: {
+      backgroundColor: '#ff1493',
+      height: 60,
+      justifyContent: 'center'
+  },
+
+signUpQuestionContainer: {
+    alignItems: 'center', 
+    justifyContent: 'center',
+    height: 50
+},
+  signupQuestionTextContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'white',
+      textAlign: 'center',
+      backgroundColor: 'transparent'
+  },
+  signUpQuestionText: {
+      fontSize: 16
+  },
+  signUpText: {
+      fontSize: 18,
+      fontWeight: 'bold'
+  }
 })

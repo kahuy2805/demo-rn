@@ -8,24 +8,61 @@ import {
   TouchableOpacity,
   Alert,
   Keyboard,
-  TouchableWithoutFeedback
+  DeviceEventEmitter,
+  TouchableWithoutFeedback,
+  Dimensions,
+  LayoutAnimation
 } from 'react-native'
 
 import CircleImageView from 'demo/src/components/circleimage/CircleImageView'
 import CustomTextInput from 'demo/src/components/textinput/CustomTextInput'
 
 export default class SignIn extends Component {
+
+constructor(props) {
+    super(props)
+    this.state = {
+         visibleHeight: Dimensions.get('window').height
+    }
+}
+
     _signup() {
         this.props.onSignUpPressed()
+    }
+
+    componentWillMount() {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow.bind(this))
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide.bind(this))
+    }
+
+    componentWillUnmount() {
+        this.keyboardDidHideListener.remove()
+        this.keyboardDidHideListener.remove()
+    }
+
+    keyboardDidShow(e) {
+        let newSize = Dimensions.get('window').height - e.endCoordinates.height
+        console.log(newSize)
+        this.setState({
+            visibleHeight: newSize
+        })
+    }
+
+    keyboardDidHide(e) {
+        this.setState({
+            visibleHeight: Dimensions.get('window').height
+        })
     }
 
     render() {
         return (
             <TouchableWithoutFeedback onPress = {Keyboard.dismiss}>
+                <View style = {[styles.signIn, {height: this.state.visibleHeight}]}>
                 <Image 
-                resizeMode = {Image.resizeMode.contain} 
+                resizeMode = {Image.resizeMode.cover} 
                 source = {require('demo/src/assets/images/bg_signin.png')} 
-                style={styles.background}>
+                style={[styles.background]}>
                     <View style={styles.topView}>
                         <CircleImageView imageUrl={require('demo/src/assets/images/check_red.png')}/>
                     </View>
@@ -58,6 +95,7 @@ export default class SignIn extends Component {
                         </View>
                     </View>
                 </Image>
+                </View>
             </TouchableWithoutFeedback>
         );
     }

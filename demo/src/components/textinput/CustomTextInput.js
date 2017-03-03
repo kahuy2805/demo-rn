@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     icon: {
         width: 20,
         height: 17,
-        marginLeft: 10
+        marginLeft: 25
     },
     input: {
         flex: 1,

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import {
+    StyleSheet,
   View,
   Navigator,
-  Text
+  Text,
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 import SignIn from 'containers/SignIn'
@@ -17,7 +20,7 @@ export default class App extends Component {
                 index: 0
             },
             {
-                title: 'Sing Up',
+                title: '',
                 index: 1
             }
         ]
@@ -50,14 +53,45 @@ export default class App extends Component {
         routes = this.props.routes
         return <Navigator.NavigationBar
        routeMapper={{
-         LeftButton: (route, navigator, index, navState) =>
-          { return (<Text></Text>); },
-         RightButton: (route, navigator, index, navState) =>
-           { return (<Text></Text>); },
-         Title: (route, navigator, index, navState) =>
-           { return (<Text>{routes[index].title}</Text>); },
+         LeftButton: this.getLeftButtonNavigation,
+         RightButton: this.getRightButtonNavigation,
+         Title: this.getTitleNavigation,
        }}
        style={{backgroundColor: 'transparent'}}
         />
     }
+
+    getLeftButtonNavigation(route, navigator, index, navState) {
+        switch (index) {
+            case 0:
+            return
+            case 1:
+            return <TouchableOpacity style = {styles.backButton} onPress = {() => {navigator.pop()}}>
+                <Image 
+                source = {require('assets/images/back.png')} 
+                style = {styles.backImageButton}
+                />
+            </TouchableOpacity>
+        }
+    }
+
+    getRightButtonNavigation(route, navigator, index, navState) {
+    }
+
+    getTitleNavigation(route, navigator, index, navState) {
+    }
 }
+
+const styles = StyleSheet.create({
+    backImageButton: {
+        width: 21,
+        height: 21,
+        marginLeft: 15,
+        alignItems: 'center'
+    },
+    backButton: {
+        flex: 1,
+        width: 50,
+        justifyContent: 'center'
+    }
+})

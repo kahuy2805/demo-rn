@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         height: undefined
     },
     titlePage: {
-        flex: 0.5
+        flex: 0.75
     },
     inputView: {
         flex: 2
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     titlePageText: {
         backgroundColor: 'transparent',
         color: 'white',
-        marginTop: 50,
+        marginTop: 100,
         marginLeft: 30,
         fontSize: 40
     },

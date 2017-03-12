@@ -8,6 +8,9 @@ import {
   Image
 } from 'react-native';
 
+import { Provider } from 'react-redux'
+import store from 'config/store'
+
 import SignIn from 'containers/SignIn'
 import SignUp from 'containers/SignUp'
 
@@ -30,12 +33,14 @@ export default class App extends Component {
     render() {
         routes = this.props.routes
         return (
+            <Provider store = {store}>
             <Navigator 
             initialRoute = {routes[0]}
             initialRouteStack = {routes}
             renderScene = {this.renderScene.bind(this)}
             navigationBar = {this.navigationBar()}
             />
+            </Provider>
         );
     }
 

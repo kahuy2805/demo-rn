@@ -22,6 +22,7 @@ render() {
                 style = {styles.icon}
                 resizeMode = 'contain'/>
                 <TextInput 
+                {...this.props}
                 style = {styles.input}
                 placeholder = {this.props.placeholder}
                 placeholderTextColor = 'white'

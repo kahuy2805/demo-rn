@@ -59,7 +59,6 @@ export function signInReducer(state = INITIAL_STATE, action) {
 }
 
 // Load data
-
 export function login(userCredentials) {
     return (dispatch, getState) => {
         dispatch(loginRequest);
@@ -69,7 +68,7 @@ export function login(userCredentials) {
         })
         .catch(error => {
             console.log('There has been a problem with your fetch operation: ' + error.message);
-            dispatch(loginRequestFailed(error))
+            dispatch(loginFailed(error))
     });
     }
 }

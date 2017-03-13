@@ -15,6 +15,7 @@ import {
 } from 'react-native'
 
 import { connect } from 'react-redux';
+import { login } from 'reducer/signInReducer'
 
 import CircleImageView from 'demo/src/components/circleimage/CircleImageView'
 import CustomTextInput from 'demo/src/components/textinput/CustomTextInput'
@@ -36,6 +37,7 @@ export class SignIn extends Component {
     }
 
     _signIn() {
+        console.log(this.props);
         this.props.login({
             username: this.state.username,
             password: this.state.password

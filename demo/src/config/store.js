@@ -17,14 +17,17 @@ if (__DEV__) {
         devTools({
             name: Platform.OS,
             hostname: 'localhost',
-            port: 5678
+            port: 8081
         })
     );
+    console.log(enhancer)
     store = createStore(reducer, {}, enhancer);
 } else {
     store = createStore(reducer,
         composeWithDevTools(
-            applyMiddleware(thunk)));
+            applyMiddleware(thunk)
+            )
+            );
 }
 
 export default store;

@@ -28,7 +28,6 @@ class Api {
     const url = `${host}${route}`
     let options = Object.assign({ method: verb }, params ? { body: JSON.stringify(params) } : null );
     options.headers = Api.headers()
-    console.log(url)
     return fetch(url, options).then( resp => {
       let json = resp.json();
       if (resp.ok) {

@@ -37,7 +37,6 @@ export class SignIn extends Component {
     }
 
     _signIn() {
-        console.log(this.props);
         this.props.login({
             username: this.state.username,
             password: this.state.password
@@ -90,7 +89,7 @@ export class SignIn extends Component {
                                     onChangeText = {text => this.setState({password: text})}
                                     style={styles.textInput}
                                     icon={require('demo/src/assets/images/password.png')}
-                                    placeholder={"Password"} />
+                                    placeholder={"Password"}  />
                                 <TouchableOpacity style={styles.buttonForgotPassword}>
                                     <Text style={styles.buttonText}>Forgot Password</Text>
                                 </TouchableOpacity>
@@ -121,7 +120,8 @@ SignIn.propTypes = {
 }
 
 function mapStateToProps(state) {
-    console.log('kahuy')
+    console.log("state")
+    console.log(state)
   return {
     error: state.signInReducer.error,
     loading: state.signInReducer.loading,
@@ -131,7 +131,6 @@ function mapStateToProps(state) {
 
 // Map Redux actions to component props
 function mapDispatchToProps(dispatch) {
-    console.log('kahuy')
   return {
     login: (userCredentials) => dispatch(login(userCredentials))
   }
